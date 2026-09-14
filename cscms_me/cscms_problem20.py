@@ -1,9 +1,22 @@
-# num = int(input())
-# num_lst = list(map(int, input().split()))
-num = 2
-num_lst =[3, 5]
-max_height = max(num_lst)
-for i in range(max_height): 
-    for j in range(1,num_lst[i]+1):
-        print(" "*(num_lst[i]-1)+"*"*(2*j-1))
-    
+num = int(input())
+num_lst = list(map(int, input().split()))
+height = max(num_lst)
+
+for i in range(1, height + 1):
+    row = ""
+    for mountain in num_lst:
+        # Which row of this particular mountain are we on?
+        local_row = i - (height - mountain)
+        if local_row < 1:
+            # This mountain hasn't started yet
+            row += "-" * (mountain * 2 - 1)
+        else:
+            # This mountain exists on this row
+            leading_dashes = mountain - local_row
+            stars = local_row * 2 - 1
+            
+            row += "-" * leading_dashes
+            row += "*" * stars
+            row += "-" * leading_dashes
+
+    print(row)
